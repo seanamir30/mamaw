@@ -34,7 +34,7 @@ const Signup = ({ setMode }) => {
       <h2>Signup</h2>
           <form style={{maxWidth: '400px', margin: 'auto'}} onSubmit={onSubmit}>
           { error && <alert color="danger">{error}</alert>}
-              <label for="signUpEmail" sm={4}>Email</label>
+              <label htmlFor="signUpEmail" sm={4}>Email</label>
                 <input
                   type="email"
                   value={email}
@@ -42,7 +42,7 @@ const Signup = ({ setMode }) => {
                   name="email"
                   id="signUpEmail"
                   placeholder="Email" />
-              <label for="signUpPassword" sm={4}>Password</label>
+              <label htmlFor="signUpPassword" sm={4}>Password</label>
                 <input
                   type="password"
                   name="passwordOne"
@@ -50,7 +50,7 @@ const Signup = ({ setMode }) => {
                   onChange={(event) => setPasswordOne(event.target.value)}
                   id="signUpPassword"
                   placeholder="Password" />
-              <label for="signUpPassword2" sm={4}>Confirm Password</label>
+              <label htmlFor="signUpPassword2" sm={4}>Confirm Password</label>
                 <input
                   type="password"
                   name="password"

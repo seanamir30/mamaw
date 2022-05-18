@@ -28,7 +28,7 @@ export default function Login({ setMode, setIsModalOpen }) {
           <h2>Login</h2>
           <form onSubmit={onSubmit}>
             { error && <alert color="danger">{error}</alert>}
-                <label for="loginEmail">Email</label>
+                <label htmlFor="loginEmail">Email</label>
                 <input
                     type="email"
                     value={email}
@@ -36,7 +36,7 @@ export default function Login({ setMode, setIsModalOpen }) {
                     name="email"
                     id="loginEmail"
                     placeholder="Email" />
-                <label for="loginPassword">Password</label>
+                <label htmlFor="loginPassword">Password</label>
                 <input
                     type="password"
                     name="password"
