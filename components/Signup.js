@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-
+import { doc, setDoc } from "firebase/firestore"; 
+import { getFirestore } from 'firebase/firestore'
 import { useAuth } from '../context/AuthUserContext';
 
 const Signup = ({ setMode }) => {
@@ -13,12 +14,16 @@ const Signup = ({ setMode }) => {
 
   const { createUserWithEmailAndPassword } = useAuth();
 
+  const db = getFirestore()
+
   const onSubmit = event => {
     setError(null)
     if(passwordOne === passwordTwo)
       createUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        console.log("Success. The user is created in firebase")
+        setDoc(doc(db,'users',authUser.user.multiFactor.user.uid),{
+          role: 'client',
+        })
         setMode('Login')
       })
       .catch(error => {
@@ -30,37 +35,34 @@ const Signup = ({ setMode }) => {
   };
 
   return (
-      <>
-      <h2>Signup</h2>
-          <form style={{maxWidth: '400px', margin: 'auto'}} onSubmit={onSubmit}>
+          <form onSubmit={onSubmit}>
           { error && <alert color="danger">{error}</alert>}
-              <label htmlFor="signUpEmail" sm={4}>Email</label>
                 <input
+                  className="w-full border-b-1 h-10 mb-4 border-b-2"
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   name="email"
                   id="signUpEmail"
                   placeholder="Email" />
-              <label htmlFor="signUpPassword" sm={4}>Password</label>
                 <input
+                  className="w-full border-b-1 h-10 mb-4 border-b-2"
                   type="password"
                   name="passwordOne"
                   value={passwordOne}
                   onChange={(event) => setPasswordOne(event.target.value)}
                   id="signUpPassword"
                   placeholder="Password" />
-              <label htmlFor="signUpPassword2" sm={4}>Confirm Password</label>
                 <input
+                  className="w-full border-b-1 h-10 mb-4 border-b-2"
                   type="password"
                   name="password"
                   value={passwordTwo}
                   onChange={(event) => setPasswordTwo(event.target.value)}
                   id="signUpPassword2"
-                  placeholder="Password" />
-               <button>Sign Up</button>
+                  placeholder="Confirm Password" />
+               <button className="w-full text-white bg-black rounded-md py-2 mt-4">Sign Up</button>
           </form>
-    </>
   )
 }
 

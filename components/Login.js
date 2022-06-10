@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import { getFirestore } from 'firebase/firestore'
 import { useAuth } from '../context/AuthUserContext';
+import { useUserData } from '../context/userData';
 
 export default function Login({ setMode, setIsModalOpen }) {
   const [email, setEmail] = useState("");
@@ -10,11 +10,14 @@ export default function Login({ setMode, setIsModalOpen }) {
   const [error, setError] = useState(null);
   const router = useRouter();
   const { signInWithEmailAndPassword } = useAuth();
+  const [userData, setUserData] = useUserData();
+  const db = getFirestore();
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     setError(null)
     signInWithEmailAndPassword(email, password)
-    .then(authUser => {
+    .then(() => {
+      if(userData.client == 'admin') 
       setIsModalOpen(false);
     })
     .catch(error => {
@@ -24,29 +27,25 @@ export default function Login({ setMode, setIsModalOpen }) {
   };
 
   return (
-        <>
-          <h2>Login</h2>
           <form onSubmit={onSubmit}>
             { error && <alert color="danger">{error}</alert>}
-                <label htmlFor="loginEmail">Email</label>
                 <input
+                    className="w-full border-b-1 h-10 mb-4 border-b-2"
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     name="email"
                     id="loginEmail"
                     placeholder="Email" />
-                <label htmlFor="loginPassword">Password</label>
                 <input
+                    className="w-full border-b-1 h-10 mb-4 border-b-2"
                     type="password"
                     name="password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     id="loginPassword"
                     placeholder="Password" />
-                <button>Login</button>
-                No account? <button onClick={()=>setMode('Signup')}>Create one</button>
+                <button className="w-full text-white bg-black rounded-md py-2 mt-4">Login</button>
             </form>
-    </>
   )
 }
