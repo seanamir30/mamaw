@@ -5,12 +5,13 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthUserContext';
 import { collection ,getDocs,getFirestore } from "firebase/firestore"; 
 
-const admin = () => {
+const Admin = () => {
   const [userData, setUserData] = useUserData();
   const [items, setItems] = useState([]);
   const router = useRouter()
   const {authUser} = useAuth()
   const db = getFirestore()
+
   useEffect(() => {
     getDocs(collection(db, 'items'))
     .then((res)=>{
@@ -38,4 +39,4 @@ const admin = () => {
   )
 }
 
-export default admin
+export default Admin
