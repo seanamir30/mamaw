@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { getFirestore } from 'firebase/firestore'
 import { useAuth } from '../context/AuthUserContext';
-import { useUserData } from '../context/userData';
+import { useRouter } from 'next/router';
+import { doc, getDoc } from "firebase/firestore";
 
 export default function Login({ setMode, setIsModalOpen }) {
   const [email, setEmail] = useState("");
@@ -10,14 +10,17 @@ export default function Login({ setMode, setIsModalOpen }) {
   const [error, setError] = useState(null);
   const router = useRouter();
   const { signInWithEmailAndPassword } = useAuth();
-  const [userData, setUserData] = useUserData();
   const db = getFirestore();
 
   const onSubmit = (event) => {
     setError(null)
     signInWithEmailAndPassword(email, password)
-    .then(() => {
-      if(userData.client == 'admin') 
+    .then((authUser) => {
+      getDoc(doc(db, "users",authUser.user.multiFactor.user.uid))
+        .then((userData)=>{
+          if(userData.data().role == 'admin') router.push('/admin');
+        })
+      
       setIsModalOpen(false);
     })
     .catch(error => {
