@@ -18,18 +18,12 @@ export default function Home() {
     if(!!authUser){
       getDoc(doc(db, "users", authUser.uid))
       .then((res)=>{
-        console.log(res.data())
         setUserData({
           uid: authUser.uid,
           email: authUser.email,
           ...res.data()
         })
-      })
-      .then(()=>{
-        getDoc(doc(db, "users",authUser.uid))
-          .then((userData)=>{
-            if(userData.data().role == 'admin') router.push('/admin');
-          })
+        if(res.data().role == 'admin') router.push('/admin');
       })
     } else {
       setUserData()

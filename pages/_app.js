@@ -3,7 +3,7 @@ import { UserData } from '../context/userData';
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <AuthUserProvider><UserData><Component {...pageProps} /></UserData></AuthUserProvider>
+  return <UserData><AuthUserProvider><Component {...pageProps} /></AuthUserProvider></UserData>
 }
 
 export default MyApp

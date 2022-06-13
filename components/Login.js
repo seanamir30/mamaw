@@ -19,7 +19,9 @@ export default function Login({ setMode, setIsModalOpen }) {
       getDoc(doc(db, "users",authUser.user.multiFactor.user.uid))
         .then((userData)=>{
           if(userData.data().role == 'admin') router.push('/admin');
+          localStorage.setItem('token', authUser.user.multiFactor.user.uid)
         })
+        
       
       setIsModalOpen(false);
     })

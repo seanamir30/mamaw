@@ -11,6 +11,7 @@ const Admin = () => {
   const router = useRouter()
   const {authUser} = useAuth()
   const db = getFirestore()
+  const {itemDeleted} = router.query;
 
   useEffect(() => {
     getDocs(collection(db, 'items'))
@@ -30,10 +31,11 @@ const Admin = () => {
   
   return (
     <div>
+      <div>{itemDeleted} has been deleted</div>
       <Header/>
       <button onClick={()=>{router.push('/admin/add-item')}}>add</button>
       {items.map((item)=>(
-        <div key={item.id}>{item.name}</div>
+        <div onClick={()=>{router.push({pathname:`/${item.cuid}`,state: { detail: item }},`/${item.cuid}`)}} key={item.cuid}>{item.name}</div>
       ))}
     </div>
   )

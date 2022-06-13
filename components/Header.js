@@ -8,7 +8,7 @@ import { useUserData } from '../context/userData';
 const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { authUser,signOut } = useAuth();
-    const [userData, setUserData] = useUserData();
+
 
     const loggedInButtons = () => {
         return(
@@ -27,7 +27,6 @@ const Header = () => {
             </div>
         )
     }
-    console.log(userData)
     return (
         <div className="border-b-2 flex border-black px-96 justify-between items-center w-screen">
             <img src={Logo.src} className="h-16 my-2"/>

@@ -15,10 +15,13 @@ const AddItem = () => {
     // }, [userData])
 
     const handleSubmit = (event) => {
-        setDoc(doc(db,'items', cuid()),{
+        const id = cuid()
+        setDoc(doc(db,'items', id),{
             price: price.current.value,
             name: name.current.value,
             description: description.current.value,
+            cuid: id
+
         })
         event.preventDefault()
     }
