@@ -1,5 +1,5 @@
 import React,{useRef, useEffect} from 'react'
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc, getDoc } from "firebase/firestore"; 
 import { getFirestore } from 'firebase/firestore'
 import cuid from 'cuid';
 import Header from '../../components/Header';
@@ -38,8 +38,8 @@ const AddItem = () => {
             price: price.current.value,
             name: name.current.value,
             description: description.current.value,
-            cuid: id
-
+            cuid: id,
+            quantity: quantity.current.value
         })
 
         router.push('/shop')
@@ -48,6 +48,7 @@ const AddItem = () => {
     return (
         <>
         <Header/>
+        <button className='bg-white rounded-xl h-[51px] w-[227px]' onClick={()=>{router.push('/shop')}}>Back</button>
         <div className="flex justify-center items-center h-[calc(100vh-6rem)] overflow-hidden">
                 <div className="bg-opacity-[0.35] py-20 px-16 rounded-md bg-white flex rounded-xl w-[91.5rem]">
                     <div className="h-[40rem] w-[31rem] p-6 rounded-md opacity-50 bg-white">

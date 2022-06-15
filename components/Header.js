@@ -37,7 +37,7 @@ const Header = () => {
     }
     return (
         <div className="border-b-2 flex border-black px-96 justify-between items-center w-screen">
-            <img src={Logo.src} className="h-16 my-2"/>
+            <img onClick={()=>{router.push('/')}} src={Logo.src} className="h-16 my-2 cursor-pointer"/>
             {isModalOpen && <AuthModal setIsModalOpen={setIsModalOpen}/>}
             {authUser ? loggedInButtons() : defaultButtons()}
         </div>

@@ -29,6 +29,7 @@ const Shop = () => {
             }
         }
     }, [])
+    console.log(items)
     
     return (
         <div>
@@ -45,7 +46,16 @@ const Shop = () => {
                         <div className="h-48 w-60 mb-4 bg-slate-500 flex justify-center items-center">dummy photo</div>
                         <p className="font-medium mb-11">{item.name} </p>
                         <p className="font-medium text-xs mb-2">Php {item.price}</p>
-                        <p className="font-light text-xs">0 Sold</p>
+                        {
+                            isAdmin ? (
+                                <div className="flex justify-between">
+                                    <p className="font-light text-xs">0 Sold</p>
+                                    <p className="font-light text-xs">{item.quantity} Remaining</p>
+                                </div>
+                            )
+                            :<p className="font-light text-xs">0 Sold</p>
+                        }
+                        
                     </div>
                 ))}
             </div>

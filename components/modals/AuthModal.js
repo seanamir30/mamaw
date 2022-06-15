@@ -7,7 +7,7 @@ import Logo from '../../assets/logo.png';
 const AuthModal = ({ setIsModalOpen }) => {
     const [isSignup, setIsSignup] = useState(true)
   return (
-    <div className="absolute h-screen flex bg-black backdrop-blur bg-opacity-30 w-screen justify-center items-center left-0 top-0">
+    <div className="absolute h-screen flex bg-black backdrop-blur bg-opacity-30 w-screen justify-center items-center left-0 top-0 z-50">
         <div className="bg-white rounded-3xl relative transform h-[37rem] w-[30rem] flex flex-col items-center px-24 pt-20">
             <button onClick={()=>setIsModalOpen(false)} className="absolute top-0 right-0 px-4">x</button>
             <img className="w-32 pb-6" src={Logo.src}/>
