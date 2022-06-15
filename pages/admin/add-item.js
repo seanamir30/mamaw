@@ -18,6 +18,21 @@ const AddItem = () => {
     //     if(userData.role !== 'admin') router.push('')
     // }, [userData])
 
+    useEffect(() => {
+        if(typeof window !== 'undefined') {
+            const userToken = localStorage.getItem('token')
+            if(userToken){
+                getDoc(doc(db, 'users', userToken))
+                .then((res)=>{
+                    if(res.data().role !== 'admin') router.push('/')
+                })
+            } else {
+                router.push('/')
+            }
+        }
+    }, [])
+    
+
     const handleSubmit = (event) => {
         setDoc(doc(db,'items', id),{
             price: price.current.value,
