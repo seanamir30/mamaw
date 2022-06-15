@@ -3,5 +3,5 @@
 @import 'tailwindcss/utilities';
 
 html, body {
-	@apply h-screen;
+	@apply h-screen bg-gradient-to-r from-cyan-500 to-blue-500;
 }

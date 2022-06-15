@@ -35,7 +35,7 @@ const Admin = () => {
       <Header/>
       <button onClick={()=>{router.push('/admin/add-item')}}>add</button>
       {items.map((item)=>(
-        <div onClick={()=>{router.push({pathname:`/${item.cuid}`,state: { detail: item }},`/${item.cuid}`)}} key={item.cuid}>{item.name}</div>
+        <div onClick={()=>{router.push({pathname:`item/${item.cuid}`,state: { detail: item }},`item/${item.cuid}`)}} key={item.cuid}>{item.name}</div>
       ))}
     </div>
   )

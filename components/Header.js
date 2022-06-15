@@ -3,17 +3,25 @@ import AuthModal from '../components/modals/AuthModal';
 import { useAuth } from '../context/AuthUserContext';
 import Logo from '../assets/logo.png';
 import UserIcon from '../assets/user-icon.svg';
-import { useUserData } from '../context/userData';
+import { useRouter } from 'next/router';
 
 const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { authUser,signOut } = useAuth();
+    const router = useRouter();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        router.push('/')
+        signOut()
+    }
 
 
     const loggedInButtons = () => {
         return(
             <div>
-                <span onClick={()=>signOut()}>{authUser.email}</span>
+                <button onClick={()=>{router.push('/shop')}}>Shop</button>
+                <span onClick={handleLogout}>{authUser.email}</span>
                 <button onClick={()=>{setIsModalOpen(true)}}><img src={UserIcon.src} className="h-5 w-5"/></button>
             </div>
         )
@@ -22,7 +30,7 @@ const Header = () => {
     const defaultButtons = () => {
         return(
             <div>
-                <button>Shop</button>
+                <button onClick={()=>{router.push('/shop')}}>Shop</button>
                 <button onClick={()=>{setIsModalOpen(!isModalOpen)}}>Signup</button>
             </div>
         )

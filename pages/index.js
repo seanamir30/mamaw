@@ -23,7 +23,6 @@ export default function Home() {
           email: authUser.email,
           ...res.data()
         })
-        if(res.data().role == 'admin') router.push('/admin');
       })
     } else {
       setUserData()
