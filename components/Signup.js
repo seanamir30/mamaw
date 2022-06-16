@@ -4,7 +4,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { getFirestore } from 'firebase/firestore'
 import { useAuth } from '../context/AuthUserContext';
 
-const Signup = ({ setMode }) => {
+const Signup = ({ setMode, setIsModalOpen }) => {
   const [email, setEmail] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
@@ -25,6 +25,7 @@ const Signup = ({ setMode }) => {
           role: 'client',
         })
         setMode('Login')
+        setIsModalOpen(false)
       })
       .catch(error => {
         setError(error.message)
