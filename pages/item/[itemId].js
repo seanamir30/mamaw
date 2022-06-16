@@ -69,6 +69,7 @@ const Item = () => {
         }
         console.log(docData)
         setDoc(doc(db, 'items', itemId),docData)
+        router.push('/shop')
         event.preventDefault()
     }
 
