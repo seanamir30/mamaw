@@ -15,7 +15,7 @@ const AuthModal = ({ setIsModalOpen }) => {
                 <button className={clsx({'bg-black text-white': !isSignup}, 'w-full py-2')} onClick={()=>setIsSignup(false)}>Login</button>
                 <button className={clsx({'bg-black text-white': isSignup}, 'w-full py-2')} onClick={()=>setIsSignup(true)}>Signup</button>
             </div>
-            {isSignup && <Signup setIsModalOpen={setIsModalOpen} setMode={()=>setIsSignup(!isSignup)} setIsModalOpen={setIsModalOpen}/>}
+            {isSignup && <Signup setIsModalOpen={setIsModalOpen} setMode={()=>setIsSignup(!isSignup)}/>}
             {!isSignup && <Login setIsModalOpen={setIsModalOpen} setMode={()=>setIsSignup(!isSignup)}/>}
         </div>
     </div>
