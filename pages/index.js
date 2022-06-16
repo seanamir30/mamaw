@@ -77,7 +77,7 @@ export default function Home() {
   return (
     <div>
       <Header/>
-      {isAdmin ? renderAdminTable() : <><Body/><Footer/></>}
+      {isAdmin && authUser ? renderAdminTable() : <><Body/><Footer/></>}
     </div>
   )
 }
